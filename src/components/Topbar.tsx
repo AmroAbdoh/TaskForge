@@ -7,21 +7,18 @@ import {
   useTheme,
   Switch,
 } from "@mui/material";
-// import { useTaskForgeStore } from "../store/useTaskForgeStore";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/useAuthStore";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import LightModeIcon from "@mui/icons-material/LightMode";
 import useThemeStore from "../store/useThemeStore";
 
 
 
 function Topbar() {
-  // const logout = useTaskForgeStore((s) => s.logout);
+  
   const logout = useAuthStore((s) => s.logout);
   const navigate = useNavigate();
 
-  const theme = useTheme();
+  
   const { mode, toggleMode } = useThemeStore(); 
 
   const handleLogout = () => {

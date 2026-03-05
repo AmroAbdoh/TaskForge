@@ -10,7 +10,6 @@ import {
 import loginSchema from "../../Validation/loginValidation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-// import { useTaskForgeStore } from "../../store/useTaskForgeStore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore";
@@ -36,7 +35,7 @@ function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data: LoginForm) => {
-    setLoading(true); // start loading
+    setLoading(true); 
     setLoginError("");
 
     
@@ -45,7 +44,7 @@ function LoginPage() {
       const success = await new Promise<boolean>((resolve) => {
         setTimeout(() => {
           resolve(login(data.email, data.password));
-        }, 1000); // 1 second fake delay
+        }, 1000); 
       });
 
       if (!success) {

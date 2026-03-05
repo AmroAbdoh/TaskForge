@@ -1,12 +1,10 @@
 import { Typography, Button, Grid } from "@mui/material";
 import Layout from "../../components/Layout";
-// import { useTaskForgeStore } from "../../store/useTaskForgeStore";
 import { useState } from "react";
 import AddProjectDialog from "./AddProjectDialog";
 import ProjectCard from "../../components/projects/ProjectCard";
 import ProjectDialog from "./ProjectDialog";
 import type { Project } from "../../types/domain"
-
 import useProjectStore from "../../store/uesProjectStore";
 import useAuthStore from "../../store/useAuthStore";
 
@@ -14,10 +12,7 @@ import useAuthStore from "../../store/useAuthStore";
 
 function DashBoard() {
 
-  const currentUser = useAuthStore((s) => s.currentUser);
-  // const currentUser = useTaskForgeStore((s) => s.currentUser);
-  
-  // const projects = useTaskForgeStore((s) => s.projects);
+  const currentUser = useAuthStore((s) => s.currentUser);  
   const projects = useProjectStore((s) => s.projects);
 
   const userProjects = projects.filter(

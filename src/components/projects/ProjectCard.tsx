@@ -14,8 +14,7 @@ function ProjectCard({ project, onView }: Props) {
         p: 3,
         height: "100%",
         display: "flex",
-        flexDirection: "column", 
-        
+        flexDirection: "column",         
       }}
     >
       <Typography variant="h6" gutterBottom>

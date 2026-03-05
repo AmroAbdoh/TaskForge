@@ -4,7 +4,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import useThemeStore from "./store/useThemeStore";
 
 function App() {

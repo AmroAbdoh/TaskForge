@@ -16,12 +16,8 @@ import {
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import type { Project } from "../../types/domain";
-// import { useTaskForgeStore } from "../../store/useTaskForgeStore";
 import { useState } from "react";
 import useProjectStore from "../../store/uesProjectStore";
-
-
-
 
 interface Props {
   open: boolean;
@@ -29,17 +25,13 @@ interface Props {
   onClose: () => void;
 }
 
-function ProjectDialog({ open, project, onClose }: Props) {
-  // const tasks = useTaskForgeStore((s) => s.tasks);
+function ProjectDialog({ open, project, onClose }: Props) {  
   const tasks = useProjectStore((s) => s.tasks);
 
-  // const deleteProject = useTaskForgeStore((s) => s.deleteProject);
   const deleteProject = useProjectStore((s) => s.deleteProject);
-
-  // const addTask = useTaskForgeStore((s) => s.addTask);
+  
   const addTask = useProjectStore((s) => s.addTask);
 
-  // const updateTaskStatus = useTaskForgeStore((s) => s.updateTaskStatus);
   const updateTaskStatus = useProjectStore((s) => s.updateTaskStatus);
 
   const [addingTask, setAddingTask] = useState(false);

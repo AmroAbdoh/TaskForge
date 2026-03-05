@@ -9,13 +9,12 @@ type Props = {
 function Layout({ children }: Props) {
   const theme = useTheme();
   return (
-    <Box sx={{ display: "flex", minHeight: "100vh", bgcolor: theme.palette.background.default }}>
-      {/* <Sidebar /> */}
+    <Box sx={{ display: "flex", minHeight: "100vh", bgcolor: theme.palette.background.default }}>      
 
       <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
         <Topbar />
 
-        {/* PAGE CONTENT */}
+        
         <Box sx={{ p: 3, bgcolor: "inherit", flexGrow: 1  , minHeight: 0, }}>
             {children}
         </Box>

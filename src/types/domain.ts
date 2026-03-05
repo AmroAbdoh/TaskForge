@@ -1,8 +1,7 @@
 export interface User {
   id: string;
   email: string;
-  name: string;
-  // projectIds: string[];
+  name: string;  
   password: string;
 }
 

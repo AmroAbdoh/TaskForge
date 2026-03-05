@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-// import { useTaskForgeStore } from "../../store/useTaskForgeStore";
 import useProjectStore from "../../store/uesProjectStore";
 import useAuthStore from "../../store/useAuthStore";
 import { users } from "../../utils/seed";
@@ -24,13 +23,7 @@ interface Props {
 
 function AddProjectDialog({ open, onClose }: Props) {
 
-    // const users = useTaskForgeStore( (s) => s.users);
-    
-    
-    // const currentUser = useTaskForgeStore((s) => s.currentUser);
     const currentUser = useAuthStore((s) => s.currentUser);
-
-    // const addProject = useTaskForgeStore((s) => s.addProject);
     const addProject = useProjectStore((s) => s.addProject);
 
     const [title, setTitle] = useState("");
