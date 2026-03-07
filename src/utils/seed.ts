@@ -24,14 +24,16 @@ export const projects: Project[] = [
     description: "Build portfolio site",
 
     ownerID: "u1",
-    memberIds: ["u1"],
+    
+    accessUserIds: ["u1"],
   },
   {
     id: "p2",
     title: "TaskForge App",
     description: "Frontend project",
     ownerID: "u1",
-    memberIds: ["u1", "u2"],
+    
+    accessUserIds: ["u1", "u2"],
   },
   {
     id: "p3",
@@ -39,7 +41,8 @@ export const projects: Project[] = [
     description: "Campaign planning",
 
     ownerID: "u2",
-    memberIds: ["u2"],
+    
+    accessUserIds: ["u2"],
   },
 ];
 

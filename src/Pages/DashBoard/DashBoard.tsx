@@ -1,43 +1,37 @@
-import { Typography, Button, Grid } from "@mui/material";
+import { Typography, Button, Grid, Stack } from "@mui/material";
 import Layout from "../../components/Layout";
 import { useState } from "react";
 import AddProjectDialog from "./AddProjectDialog";
 import ProjectCard from "../../components/projects/ProjectCard";
-import ProjectDialog from "./ProjectDialog";
-import type { Project } from "../../types/domain"
 import useProjectStore from "../../store/uesProjectStore";
 import useAuthStore from "../../store/useAuthStore";
-
-
+import { useNavigate } from "react-router-dom";
 
 function DashBoard() {
-
-  const currentUser = useAuthStore((s) => s.currentUser);  
+  const currentUser = useAuthStore((s) => s.currentUser);
   const projects = useProjectStore((s) => s.projects);
 
+  const navigate = useNavigate();
+
   const userProjects = projects.filter(
-    (project) => currentUser && project.memberIds.includes(currentUser.id),
+    (project) => currentUser && project.accessUserIds.includes(currentUser.id),
   );
 
-  
-  
   const [openAddProject, setOpenAddProject] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [openProject, setOpenProject] = useState(false);
 
   return (
     <Layout>
-      <Typography variant="h4"   >
-        Projects
-      </Typography>
+      <Stack spacing={2} sx={{ my: 2, width: 150 }}>
+        <Typography variant="h4">Projects</Typography>
 
-      <Button
-        variant="contained"
-        sx={{ mb: 3 }}
-        onClick={() => setOpenAddProject(true)}
-      >
-        Add Project
-      </Button>
+        <Button
+          variant="contained"
+          sx={{ mb: 3 }}
+          onClick={() => setOpenAddProject(true)}
+        >
+          Add Project
+        </Button>
+      </Stack>
 
       {userProjects.length === 0 ? (
         <Typography>No Projects yet.</Typography>
@@ -45,13 +39,10 @@ function DashBoard() {
         <Grid container spacing={3}>
           {userProjects.map((project) => (
             <Grid item xs={12} md={4} key={project.id}>
-
-              <ProjectCard project={project} onView = {() =>{
-                setSelectedProject(project);
-                setOpenProject(true);
-              }}/>
-                
-
+              <ProjectCard
+                project={project}
+                onView={() => navigate(`/projects/${project.id}`)}
+              />
             </Grid>
           ))}
         </Grid>
@@ -60,15 +51,7 @@ function DashBoard() {
         open={openAddProject}
         onClose={() => setOpenAddProject(false)}
       />
-
-      <ProjectDialog
-        open={openProject}
-        project={selectedProject}
-        onClose={() => setOpenProject(false)}
-      />
-
     </Layout>
-    
   );
 }
 

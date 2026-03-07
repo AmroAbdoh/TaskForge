@@ -50,8 +50,7 @@ function LoginPage() {
       if (!success) {
         setLoginError("Invalid email or password");
       } else {
-        console.log("Login successful!", { data });
-        window.alert("Login successful!");
+        console.log("Login successful!", { data });        
         navigate("/dashboard");
       }
     } finally {

@@ -14,41 +14,40 @@ import { useState } from "react";
 import useProjectStore from "../../store/uesProjectStore";
 import useAuthStore from "../../store/useAuthStore";
 import { users } from "../../utils/seed";
+import type { addProjectDialogProps } from "../../types/addProjectDialogInterface";
 
+function AddProjectDialog({ open, onClose }: addProjectDialogProps) {
+  const currentUser = useAuthStore((s) => s.currentUser);
+  const addProject = useProjectStore((s) => s.addProject);
 
-interface Props {
-  open: boolean;
-  onClose: () => void;
-}
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [selectedAccessUserIds, setSelectedAccessUserIds] = useState<string[]>(
+    [],
+  );
 
-function AddProjectDialog({ open, onClose }: Props) {
+  const selectAbleUsers = users.filter(
+    (user) => currentUser && user.id !== currentUser.id,
+  );
 
-    const currentUser = useAuthStore((s) => s.currentUser);
-    const addProject = useProjectStore((s) => s.addProject);
+  function toggleUser(userId: string) {
+    setSelectedAccessUserIds((previousUserIds) => {
+      const isSelected = previousUserIds.includes(userId);
 
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [selectedMembers, setSelectedMembers] = useState<string[]>([]);
+      if (isSelected) {
+        return previousUserIds.filter((id) => id !== userId);
+      }
 
-    const selectAbleUsers = users.filter(
-        (u) => currentUser && u.id !== currentUser.id
-    );
+      return [...previousUserIds, userId];
+    });
+  }
 
-    const toggleMember = (id: string) => {
-    setSelectedMembers((prev) =>
-      prev.includes(id)
-        ? prev.filter((m) => m !== id)
-        : [...prev, id]
-        );
-    };
+  const handleCreate = () => {
+    addProject(title, description, selectedAccessUserIds, currentUser!.id);
 
-    const handleCreate = () => {
-    addProject(title, description, selectedMembers , currentUser!.id);
-
-    
     setTitle("");
     setDescription("");
-    setSelectedMembers([]);
+    setSelectedAccessUserIds([]);
     onClose();
   };
 
@@ -84,8 +83,8 @@ function AddProjectDialog({ open, onClose }: Props) {
                 key={user.id}
                 control={
                   <Checkbox
-                    checked={selectedMembers.includes(user.id)}
-                    onChange={() => toggleMember(user.id)}
+                    checked={selectedAccessUserIds.includes(user.id)}
+                    onChange={() => toggleUser(user.id)}
                   />
                 }
                 label={user.name}
@@ -95,8 +94,15 @@ function AddProjectDialog({ open, onClose }: Props) {
         </Stack>
       </DialogContent>
 
-      <DialogActions>
-        <Button onClick={onClose} color="error" variant="contained" sx={{mr:"auto"}}>Cancel</Button>
+      <DialogActions sx={{ mx: 2, mb: 1 }}>
+        <Button
+          onClick={onClose}
+          color="error"
+          variant="contained"
+          sx={{ mr: "auto" }}
+        >
+          Cancel
+        </Button>
         <Button variant="contained" onClick={handleCreate}>
           Create
         </Button>

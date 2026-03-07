@@ -1,20 +1,14 @@
 import { Paper, Typography, Button, Stack } from "@mui/material";
+import type { ProjectCardProps } from "../../types/projectCard";
 
-import type { Project } from "../../types/domain";
-
-interface Props {
-  project: Project;
-  onView: () => void;
-}
-
-function ProjectCard({ project, onView }: Props) {
+function ProjectCard({ project, onView }: ProjectCardProps) {
   return (
     <Paper
       sx={{
         p: 3,
         height: "100%",
         display: "flex",
-        flexDirection: "column",         
+        flexDirection: "column",
       }}
     >
       <Typography variant="h6" gutterBottom>
@@ -25,11 +19,7 @@ function ProjectCard({ project, onView }: Props) {
 
       {/* Button section */}
       <Stack direction="row" spacing={1} sx={{ mt: "70px", mx: "auto" }}>
-        <Button
-          variant="contained"
-          color="success"
-          onClick={onView}
-        >
+        <Button variant="contained" color="success" onClick={onView}>
           View Project
         </Button>
       </Stack>

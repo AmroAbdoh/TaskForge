@@ -11,7 +11,8 @@ export interface Project {
   description: string;
 
   ownerID:string;
-  memberIds:string[];
+  
+  accessUserIds:string[];
 }
 
 export interface Task {

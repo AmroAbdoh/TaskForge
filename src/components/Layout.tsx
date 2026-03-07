@@ -1,5 +1,4 @@
 import { Box , useTheme } from "@mui/material";
-// import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 
 type Props = {

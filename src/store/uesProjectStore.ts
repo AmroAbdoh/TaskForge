@@ -10,7 +10,8 @@ interface ProjectState {
   addProject: (
     title: string,
     description: string,
-    memberIds: string[],
+    
+    accessUserIds: string[],
     ownerId: string
   ) => void;
   
@@ -30,14 +31,14 @@ const useProjectStore = create<ProjectState>((set) => ({
     projects: storedProjects ?? projectsSeed,
     tasks: storedTasks ?? tasksSeed,
 
-    addProject: (title, description, memberIds, ownerId) =>
+    addProject: (title, description, accessUserIds, ownerId) =>
     set((state) => {
       const newProject: Project = {
         id: crypto.randomUUID(),
         title,
         description,
         ownerID: ownerId,
-        memberIds: Array.from(new Set([...memberIds, ownerId])),
+        accessUserIds: Array.from(new Set([...accessUserIds, ownerId])),
       };
 
       const updatedProjects = [...state.projects, newProject];
