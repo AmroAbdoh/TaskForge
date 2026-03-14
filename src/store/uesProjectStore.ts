@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import type { Project, Task } from "../types/domain";
-import { projects as projectsSeed , tasks as tasksSeed } from "../utils/seed";
+// import { projects as projectsSeed , tasks as tasksSeed } from "../utils/seed";
 import { saveToStorage, loadFromStorage } from "../utils/persist";
+import seed from "../utils/seed.json"
 
 interface ProjectState {
   projects: Project[];
@@ -25,6 +26,9 @@ interface ProjectState {
 
 const storedProjects = loadFromStorage<Project[]>("projects");
 const storedTasks = loadFromStorage<Task[]>("tasks");
+
+const projectsSeed : Project[]  = seed.projects;
+const tasksSeed : Task[]  = seed.tasks as Task[];
 
 const useProjectStore = create<ProjectState>((set) => ({ 
 

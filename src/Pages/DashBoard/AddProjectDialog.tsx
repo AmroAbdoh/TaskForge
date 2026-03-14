@@ -13,8 +13,9 @@ import {
 import { useState } from "react";
 import useProjectStore from "../../store/uesProjectStore";
 import useAuthStore from "../../store/useAuthStore";
-import { users } from "../../utils/seed";
+// import { users } from "../../utils/seed";
 import type { addProjectDialogProps } from "../../types/addProjectDialogInterface";
+import seed from "../../utils/seed.json"
 
 function AddProjectDialog({ open, onClose }: addProjectDialogProps) {
   const currentUser = useAuthStore((s) => s.currentUser);
@@ -26,7 +27,7 @@ function AddProjectDialog({ open, onClose }: addProjectDialogProps) {
     [],
   );
 
-  const selectAbleUsers = users.filter(
+  const selectAbleUsers = seed.users.filter(
     (user) => currentUser && user.id !== currentUser.id,
   );
 

@@ -38,6 +38,7 @@ function DashBoard() {
       ) : (
         <Grid container spacing={3}>
           {userProjects.map((project) => (
+            // @ts-ignore
             <Grid item xs={12} md={4} key={project.id}>
               <ProjectCard
                 project={project}

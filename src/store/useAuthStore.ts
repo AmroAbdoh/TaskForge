@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import type { User } from "../types/domain";
-import { users } from "../utils/seed";
-
+// import { users } from "../utils/seed";
+import seed from "../utils/seed.json"
 
 interface AuthState {
   currentUser: User | null;
@@ -14,7 +14,7 @@ const useAuthStore = create <AuthState> ( (set) => ({
     currentUser : null,
 
     login: (email, password) => {
-    const user = users.find(
+    const user = seed.users.find(
       (u) => u.email === email && u.password === password,
     );
     if (!user) return false;
